@@ -122,6 +122,7 @@ RUN cd /usr/local/src/ && \
 
 # init
 COPY init.sh /init.sh
+RUN chmod +x /init.sh
 
 RUN useradd -r -s /bin/false vcache
 RUN mkdir /etc/varnish
@@ -130,6 +131,7 @@ ENV VARNISH_CONFIG  /etc/varnish/default.vcl
 ENV VARNISH_STORAGE malloc,100m
 ENV VARNISH_LISTEN  :80
 ENV VARNISH_MANAGEMENT_LISTEN 127.0.0.1:6082
+ENV VARNISH_TRANSIENT Transient=malloc,512m
 
 EXPOSE 80
 EXPOSE 6082
